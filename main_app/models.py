@@ -84,3 +84,17 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+TIME_PUNCH_CHOICES = (
+    ('clock_in', 'Clock In'),
+    ('clock_out', 'Clock Out')
+)
+
+class TimePunch(models.Model):
+    date_time = models.DateTimeField(verbose_name=('Date/Time'))
+    punch_type = models.CharField(max_length=20, choices=TIME_PUNCH_CHOICES)
+
+    user= models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.date_time}: {self.punch_type}'

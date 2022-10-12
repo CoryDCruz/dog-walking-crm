@@ -1,9 +1,8 @@
 from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Activity, UserProfile
+from django.contrib.auth.forms import UserCreationForm
+from .models import Activity, TimePunch, UserProfile
 from django.contrib.auth.models import User
 from django import forms
-from django.core.validators import RegexValidator
 
 
 class ActivityForm(ModelForm):
@@ -41,3 +40,10 @@ class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
         fields = ('first_name','last_name', 'email', 'phone', 'address')
+
+class TimePunchForm(ModelForm):
+    date_time = forms.DateTimeField()
+    punch_type = forms.CharField(max_length=20)
+    class Meta: 
+        model = TimePunch
+        fields = ('date_time', 'punch_type')

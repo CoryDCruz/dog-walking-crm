@@ -1,7 +1,7 @@
 
 from distutils.log import Log
 from django.shortcuts import render, redirect
-from .models import Dog, DogPhoto, ActivityPhoto, Activity, UserProfile
+from .models import Dog, DogPhoto, ActivityPhoto, Activity, TimePunch, UserProfile
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -10,7 +10,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import ActivityForm, SignUpForm, UserEditForm, UserProfileForm
+from .forms import ActivityForm, UserEditForm, UserProfileForm, TimePunchForm
 from django.urls import reverse_lazy
 
 import uuid
@@ -63,6 +63,15 @@ def add_activity(request, dog_id):
         new_activity.dog_id = dog_id
         new_activity.save()
     return redirect('dog_detail', dog_id=dog_id)
+
+@login_required
+def add_time_punch(request, user_id):
+    form = TimePunchForm(request.POST)
+    if form.is_valid():
+        new_time_punch = form.save(commit=False)
+        new_time_punch.user_id = user_id
+        new_time_punch.save()
+    return redirect('user-profile')
 
 def signup(request):
     error_message = ''
