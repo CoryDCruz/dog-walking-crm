@@ -20,6 +20,6 @@ urlpatterns = [
     path('accounts/signup/', views.signup, name='signup'),
     path('accounts/edit/', views.UserEditView.as_view(), name='edit_profile'),
     path('landing/', views.landing, name='landing'),
+    path('profile/<int:user_id>/add_time_punch', views.add_time_punch, name='add_time_punch'),
     path('profile/', views.profile, name='user-profile'),
-    path('profile/<int:user_id>', views.add_time_punch, name='add_time_punch')
 ]

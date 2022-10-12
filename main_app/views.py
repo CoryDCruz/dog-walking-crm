@@ -49,9 +49,11 @@ def dogs_detail(request, dog_id):
 
 @login_required
 def profile(request):
+    time_punch_form = TimePunchForm()
     try: 
         profile = UserProfile.objects.get(user=request.user)
-        return render(request, 'users/profile.html', { 'profile': profile})
+        user = request.user
+        return render(request, 'users/profile.html', { 'user': user, 'profile': profile, 'time_punch_form': time_punch_form})
     except UserProfile.DoesNotExist:
         return render(request, 'users/profile.html')
 

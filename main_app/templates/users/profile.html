@@ -12,6 +12,7 @@
           <h6>Phone: {{profile.phone}}</h6>
           <h6>Address: {{profile.address}}</h6>
           <h6>{{ user.id }}</h6>
+          <h6>{{ user.time_punch_set }}</h6>
 
       </div>
       <div class="card-action">
@@ -34,4 +35,24 @@
     </div>
   </div>
 </div>
+
+<div class="col s6">
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Date/Time</th>
+        <th>Punch Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for time_punch in user.time_punch_set.all %}
+      <tr>
+        <td>{{time_punch.date_time}}</td>
+        <td>{{time_punch.punch_type}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
 {% endblock %}

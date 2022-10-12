@@ -41,9 +41,14 @@ class UserProfileForm(ModelForm):
         model = UserProfile
         fields = ('first_name','last_name', 'email', 'phone', 'address')
 
+TIME_PUNCH_CHOICES = (
+    ('clock_in', 'Clock In'),
+    ('clock_out', 'Clock Out')
+)
+
 class TimePunchForm(ModelForm):
-    date_time = forms.DateTimeField()
-    punch_type = forms.CharField(max_length=20)
+    punch_type = forms.ChoiceField(choices = TIME_PUNCH_CHOICES)
+    
     class Meta: 
         model = TimePunch
         fields = ('date_time', 'punch_type')
